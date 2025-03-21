@@ -1,0 +1,1 @@
+export const API_URL = "https://backend.graycorp.io:9000/mymate/api/v1/tempClients";
