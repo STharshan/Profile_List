@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { setSearchQuery } from "../store/ProfileSlice";
 
 /* that profile data are get from your apiendpoint 
   because your api end point is give only all client data 
@@ -156,6 +158,7 @@ const profiles = [
 const ProfileDetails = () => {
   const { id } = useParams(); // Get profile ID from URL
   const navigate = useNavigate();
+  const dispatch = useDispatch();// Get the dispatch function to Reset search query
 
   /*
   const [profile, setProfile] = useState(null);
@@ -203,7 +206,10 @@ const ProfileDetails = () => {
         <p className="text-lg text-gray-700 mt-2"><strong>Contact:</strong> {profile.client_mobile}</p>
         <p className="text-lg text-gray-700 mt-1"><strong>City:</strong> {profile.client_city}</p>
         <button 
-          onClick={() => navigate("/")}
+          onClick={() => {
+            dispatch(setSearchQuery("")); // Reset search query
+            navigate("/"); // Navigate back to profile list
+          }}
           className="mt-6 px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
         >
           Back to Profiles
